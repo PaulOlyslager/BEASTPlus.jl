@@ -1,0 +1,1 @@
+# make it possible to add equations, introduce a zero object for the rhs 
