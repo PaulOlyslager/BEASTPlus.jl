@@ -3,7 +3,11 @@ uuid = "e2d8266a-d851-4f32-9558-488e5bc11105"
 authors = ["Paul-Olyslager"]
 version = "1.0.0-DEV"
 
+[deps]
+BEAST = "bb4162c7-ba94-5a20-af32-d8ec4428bdd1"
+
 [compat]
+BEAST = "2.5.0"
 julia = "1.6.7"
 
 [extras]
