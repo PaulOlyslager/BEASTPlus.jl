@@ -1,5 +1,6 @@
 struct IdentityMatrix <: BEAST.AbstractOperator end
 export IdentityMatrix
+using LinearAlgebra
 function BEAST.assemble(op::IdentityMatrix, test_functions, trial_functions;
     storage_policy = Val{:bandedstorage},
     quadstrat=nothing) 
