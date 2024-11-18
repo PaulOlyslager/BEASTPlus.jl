@@ -1,5 +1,5 @@
 struct IdentityMatrix <: BEAST.Operator end
-
+export IdentityMatrix
 function assemble(op::IdentityMatrix, test_functions, trial_functions;
     storage_policy = Val{:bandedstorage},
     quadstrat=nothing) 
