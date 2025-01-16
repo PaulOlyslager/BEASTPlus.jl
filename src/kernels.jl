@@ -1,5 +1,5 @@
 using BEAST
-
+using StaticArrays
 struct HH3DGradGreen2{T} <: BEAST.Kernel{T}
     gamma::T
 end
