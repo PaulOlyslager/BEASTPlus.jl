@@ -52,13 +52,13 @@ end
 function (op::HH3DGreenFF)(x::Union{SVector,Vector},y)
     gamma = op.gamma
     x = normalize(x)
-    green = exp(gamma*(x⋅y))*(i4pi)
+    green = exp(gamma*(x⋅cartesian(y)))*(i4pi)
     green
 end
 function (op::HH3DGradGreenFF)(x::Union{SVector,Vector},y)
     gamma = op.gamma
     x = normalize(x)
-    green = exp(gamma*(x⋅y))*(i4pi)
+    green = exp(gamma*(x⋅cartesian(y)))*(i4pi)
     gradgreen = -gamma  * green * x
     gradgreen
 end
@@ -66,13 +66,13 @@ end
 function (op::HH3DGreenFF2)(x::Union{SVector,Vector},y)
     gamma = op.gamma
     x = normalize(x)
-    green = expm1(gamma*(x⋅y))*(i4pi)
+    green = expm1(gamma*(x⋅cartesian(y)))*(i4pi)
     green
 end
 function (op::HH3DGradGreenFF2)(x::Union{SVector,Vector},y)
     gamma = op.gamma
     x = normalize(x)
-    green = expm1(gamma*(x⋅y))*(i4pi)
+    green = expm1(gamma*(x⋅cartesian(y)))*(i4pi)
     gradgreen = -gamma  * green * x
     gradgreen
 end
