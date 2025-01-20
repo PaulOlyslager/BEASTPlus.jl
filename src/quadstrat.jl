@@ -15,3 +15,10 @@ function BEAST.assemble(op::AssignQuadStrat, test_functions, trial_functions;
     quadstrat=nothing)
     BEAST.assemble(op.op, test_functions, trial_functions; storage_policy=storage_policy, quadstrat=op.qs)
 end
+
+
+struct CloseQuadStrat
+    sigma
+    nearquadstrat
+end
+
