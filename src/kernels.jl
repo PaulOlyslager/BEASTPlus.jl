@@ -1,5 +1,6 @@
 using BEAST
 using StaticArrays
+const i4pi = 1/(4*pi)
 struct HH3DGradGreen2{T} <: BEAST.Kernel{T}
     gamma::T
 end
