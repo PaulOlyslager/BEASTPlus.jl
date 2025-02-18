@@ -40,7 +40,18 @@ struct HH3DGreenFF2{T} <: BEAST.Kernel{T}
     gamma::T
 end
 
-
+struct HH3DGradDivGreen{T} <: BEAST.Kernel{T}
+    gamma::T
+end
+function (op::HH3DGradDivGreen)(x,y)
+    @error "do not integrate HH3DGradDivGreen directly"
+end
+struct HH3DInt1{T} <: BEAST.Kernel{T}
+    gamma::T
+end
+struct HH3DInt2{T} <: BEAST.Kernel{T}
+    gamma::T
+end
 # function (op::HH3DGreenFF)(x,y)
 #     gamma = op.gamma
 
@@ -77,5 +88,5 @@ function (op::HH3DGradGreenFF2)(x::Union{SVector,Vector},y)
     gradgreen = -gamma  * green * x
     gradgreen
 end
-export HH3DGradGreen2, HH3DGreen2, HH3DGradGreenFF, HH3DGreenFF, HH3DGradGreenFF2, HH3DGreenFF2
+export HH3DGradGreen2, HH3DGreen2, HH3DGradGreenFF, HH3DGreenFF, HH3DGradGreenFF2, HH3DGreenFF2, HH3DGradDivGreen
 #### exp(-ikr)/r omitted

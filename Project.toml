@@ -5,15 +5,21 @@ version = "1.0.0-DEV"
 
 [deps]
 BEAST = "bb4162c7-ba94-5a20-af32-d8ec4428bdd1"
+BenchmarkTools = "6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf"
 CompScienceMeshes = "3e66a162-7b8c-5da0-b8f8-124ecd2c3ae1"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+Plotly = "58dd65bb-95f3-509e-9936-c39a10fdeae7"
+SauterSchwab3D = "0a13313b-1c00-422e-8263-562364ed9544"
 SparseArrays = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 
 [compat]
 BEAST = "2.5.0"
+BenchmarkTools = "1.6.0"
 CompScienceMeshes = "0.8.3"
 LinearAlgebra = "1.10.0"
+Plotly = "0.4.1"
+SauterSchwab3D = "0.1.4"
 SparseArrays = "1.10.0"
 StaticArrays = "1.9.10"
 julia = "1.6.7"
