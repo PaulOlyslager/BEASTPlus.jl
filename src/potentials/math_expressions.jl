@@ -8,9 +8,9 @@ function BEAST.potential(op::BEAST.PotentialIntegralOperator{D,U, <: _TupleFunct
     type=SVector{3,ComplexF64},
 	quadstrat=nothing) where {D,U,W}
     if quadstrat === nothing
-        return potential(PotentialIntegralOperatorKern(op.kernel,operator(op.op2)),points,coeffs,op.bfunc(basis);type)
+        return potential(BEAST.PotentialIntegralOperatorKern(op.kernel,operator(op.op2)),points,coeffs,op.bfunc(basis);type)
     else
-        return potential(PotentialIntegralOperatorKern(op.kernel,operator(op.op2)),points,coeffs,op.bfunc(basis);type,quadstrat)
+        return potential(BEAST.PotentialIntegralOperatorKern(op.kernel,operator(op.op2)),points,coeffs,op.bfunc(basis);type,quadstrat)
 
     end
 end

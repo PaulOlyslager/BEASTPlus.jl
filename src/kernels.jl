@@ -49,6 +49,16 @@ end
 struct HH3DInt1{T} <: BEAST.Kernel{T}
     gamma::T
 end
+function (op::HH3DInt1)(x,y)
+    gamma = op.gamma
+
+    r = cartesian(x) - cartesian(y)
+    R = norm(r)
+    iR = 1/R
+    green = -1/gamma^2*(expm1(-gamma*R)+gamma*R)*(i4pi*iR^2)*r/R
+    green
+end
+
 struct HH3DInt2{T} <: BEAST.Kernel{T}
     gamma::T
 end
