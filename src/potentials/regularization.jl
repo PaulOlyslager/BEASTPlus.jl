@@ -20,11 +20,13 @@ end
 #         regularize(BEAST.PotentialIntegralOperator{2}(HH3DInt1(pot.kernel.gamma),Cross(),b->strace(pot.bfunc(b)))) -
 #         regularize(BEAST.PotentialIntegralOperator{3}(HH3DInt1(pot.kernel.gamma),Cross(),b->curl(pot.bfunc(b))))
 # end
+ntrace(X::BEAST.Space) = BEAST.ntrace(X,boundary(geometry(X)))
 function regularize(pot::BEAST.PotentialIntegralOperator{3,<:BEAST.HH3DGreen, <: Times,W}) where {W}
-    @warn "assumed basis function is normal zero on boundary"
+    #@warn "assumed basis function is normal zero on boundary"
     @warn "assumes curl is zero of basis function"
     return regularize(BEAST.PotentialIntegralOperator{3}(HH3DInt1(pot.kernel.gamma),Times(),b->divergence(pot.bfunc(b)))) +
-        regularize(BEAST.PotentialIntegralOperator{2}(HH3DInt1(pot.kernel.gamma),Cross(),b->strace(pot.bfunc(b))))
+        regularize(BEAST.PotentialIntegralOperator{2}(HH3DInt1(pot.kernel.gamma),Cross(),b->strace(pot.bfunc(b)))) + 
+        (-1)*regularize(BEAST.PotentialIntegralOperator{2}(HH3DInt1(pot.kernel.gamma),Times(),b->ntrace(pot.bfunc(b))))
 end
 function regularize(pot::BEAST.PotentialIntegralOperator{3,<: HH3DGradDivGreen, <: Times,W}) where {W}
     @warn "assumed basis function is div conforming and normal zero on boundary"
