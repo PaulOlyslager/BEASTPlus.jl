@@ -55,7 +55,7 @@ function (op::HH3DInt1)(x,y)
     r = cartesian(x) - cartesian(y)
     R = norm(r)
     iR = 1/R
-    green = -1/gamma^2*(expm1(-gamma*R)+gamma*R)*(i4pi*iR^2)*r/R
+    green = -1/gamma^2*(expm1(-gamma*R)+gamma*R*exp(-gamma*R))*(i4pi*iR^2)*r/R
     green
 end
 

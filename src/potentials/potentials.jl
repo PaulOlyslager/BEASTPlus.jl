@@ -22,7 +22,7 @@ end
 function potential(op::LinearCombinationOfPotentials,points, coeffs, basis; 
     type=SVector{3,ComplexF64},
 	quadstrat=nothing)
-    if quadstrat == nothing
+    if quadstrat === nothing
         return sum(ci*potential(opi,points,coeffs,basis,type=type) for (opi,ci) in zip(op.potentials,op.coefficients))
     else
         return sum(ci*potential(opi,points,coeffs,basis,type=type,quadstrat=quadstrat) for (opi,ci) in zip(op.potentials,op.coefficients))
