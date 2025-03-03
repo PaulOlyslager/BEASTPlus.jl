@@ -63,6 +63,35 @@ function ttrace(X::BEAST.NDLCDBasis{T}) where {T}
     end
     return BEAST.RTBasis(facemesh,unique_fn.(fns_new),X.pos)
 end
+function ttrace(X::BEAST.NDLCCBasis{T}) where {T}
+    facemesh = skeleton(X.geo,2)
+    tetmesh = X.geo
+    fns_new = typeof(X.fns[1])[]
+    U = sparse(transpose(connectivity(facemesh,tetmesh,x->x)))
+    rows = rowvals(U)
+    vals = nonzeros(U)
+    for fn in X.fns
+        fn_new = typeof(fn[1])[]
+        for shape in fn
+            for i in nzrange(U,shape.cellid)
+                faceid = rows[i]
+                face_orient = sign(vals[i])
+                local_index = abs(vals[i])
+                ϕ = refspace(X)
+                Q = tangential_interpolate(BEAST.RTRefSpace{T}(),chart(facemesh,faceid),ϕ,chart(tetmesh,shape.cellid))
+                for (j,c) in enumerate(Q[shape.refid,1:end])
+                    if abs(c) > sqrt(eps())
+                        push!(fn_new,BEAST.Shape(faceid,j,c*shape.coeff))
+                    end
+
+                end
+
+            end
+        end
+        push!(fns_new,fn_new)
+    end
+    return BEAST.RTBasis(facemesh,unique_fn.(fns_new),X.pos)
+end
 function strace(X::BEAST.NDLCDBasis{T}) where {T}
     facemesh = skeleton(X.geo,2)
     tetmesh = X.geo
