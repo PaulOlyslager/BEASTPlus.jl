@@ -121,7 +121,35 @@ function strace(X::BEAST.NDLCDBasis{T}) where {T}
     end
     return BEAST.BDMBasis(facemesh,unique_fn.(fns_new),X.pos)
 end
+function strace(X::BEAST.NDLCCBasis{T}) where {T}
+    facemesh = skeleton(X.geo,2)
+    tetmesh = X.geo
+    fns_new = typeof(X.fns[1])[]
+    U = sparse(transpose(connectivity(facemesh,tetmesh,x->x)))
+    rows = rowvals(U)
+    vals = nonzeros(U)
+    for fn in X.fns
+        fn_new = typeof(fn[1])[]
+        for shape in fn
+            for i in nzrange(U,shape.cellid)
+                @assert length(nzrange(U,shape.cellid)) == 4
+                faceid = rows[i]
+                face_orient = sign(vals[i])
+                local_index = abs(vals[i])
+                ϕ = refspace(X)
+                Q = ntangential_interpolate(BEAST.BDMRefSpace{T}(),chart(facemesh,faceid),ϕ,chart(tetmesh,shape.cellid))
+                for (j,c) in enumerate(Q[shape.refid,1:end])
+                    if abs(c) > sqrt(eps())
+                        push!(fn_new,BEAST.Shape(faceid,j,face_orient*c*shape.coeff))
+                    end
+                end
 
+            end
+        end
+        push!(fns_new,fn_new)
+    end
+    return BEAST.BDMBasis(facemesh,unique_fn.(fns_new),X.pos)
+end
 function _trace(X::BEAST.LagrangeBasis{D,C,M,T,NF}) where {D,C,M,T,NF}
     facemesh = skeleton(X.geo,2)
     tetmesh = X.geo
