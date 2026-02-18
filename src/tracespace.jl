@@ -208,7 +208,7 @@ function trace(X::BEAST.LagrangeBasis{D,C,M,T,NF}) where {D,C,M,T,NF}
     end
     return BEAST.LagrangeBasis{1,-1,length(X.fns)}(facemesh,unique_fn.(fns_new),X.pos)
 end
-ntimestrace(X) = _BasisTimes(n,trace(X))
+ntimestrace(X) = BEAST._BasisTimes(n,trace(X))
 # ### coordinate function accepts meshpoint and evaluates refspace in chart
 # function evalbar(ϕ::BEAST.RefSpace,chart)
 #     return function (mp)
